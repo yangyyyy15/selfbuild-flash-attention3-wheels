@@ -1,7 +1,7 @@
-name: Build SageAttention for ComfyUI
+name: Build FlashAttention3 for ComfyUI
 
 on:
-  workflow_dispatch: # 允许你在 GitHub 网页端手动点击运行
+  workflow_dispatch:
 
 jobs:
   build-win-wheels:
@@ -29,13 +29,13 @@ jobs:
         with:
           cuda: '12.8.0'
 
-      - name: Build SageAttention Wheel
+      - name: Build FA3 Wheel
         shell: pwsh
-        run: .\scripts\build_sage_wheel.ps1
+        run: .\scripts\build_fa3_wheel.ps1
 
       - name: Upload wheel artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sageattention-win-cu128-torch270-py310
+          name: flash-attention-3-win-cu128-torch270-py310
           path: C:\tmp\wheels\*.whl
           retention-days: 7
